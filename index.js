@@ -308,12 +308,7 @@ NyaaTorrents.prototype.search = function search(query, cb) {
 // a callback to be called on completion with `err` and `result` arguments. As
 // with the previous method, `err` will be null in the case of success.
 NyaaTorrents.prototype.get = function get(id, cb) {
-  var uri = url.parse(this.baseUrl, true);
-
-  uri.query.page = "torrentinfo";
-  uri.query.tid = id;
-
-  request({uri: uri, jar: this.cookies}, function(err, res, data) {
+  request({uri: this.baseUrl + '?page=view&tid=' + id, jar: this.cookies}, function(err, res, data) {
     if (err) {
       return cb(err);
     }
